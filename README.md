@@ -20,6 +20,30 @@
 }
 ```
 
+## GET: /clientes/:codigo
+### Response Body
+```json
+{
+	"nome": "string",
+	"livros": [{
+		"codigo": "uuid",
+		"titulo": "string",
+		"descricao": "string",
+		"ano": 0,
+		"codigoCliente": "uuid",
+		"autores": [{
+				"codigo": "uuid",
+				"nome": "string"
+			},
+			{
+				"codigo": "uuid",
+				"nome": "string"
+			}
+		]
+	}]
+}
+```
+
 ## PUT: /clientes/:codigo
 ### Request Body
 ```json
