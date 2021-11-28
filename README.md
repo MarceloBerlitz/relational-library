@@ -92,7 +92,7 @@
 	"descricao": "string",
 	"ano": 0,
 	"autores": ["string", "string"],
-	"codigo_usuario": 0
+	"codigoUsuario": 0
 }
 ```
 ## GET: /livros/:codigo
