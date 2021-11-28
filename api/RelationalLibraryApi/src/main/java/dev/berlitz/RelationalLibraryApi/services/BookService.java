@@ -8,6 +8,8 @@ import dev.berlitz.RelationalLibraryApi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class BookService {
     @Autowired
@@ -25,7 +27,8 @@ public class BookService {
         toEdit.setAno(book.getAno());
         toEdit.setDescricao(book.getDescricao());
         toEdit.setAutores(book.getAutores());
-        toEdit.setUsuario(userRepository.getById(book.getCodigoUsuario()));
+        Optional.ofNullable(book.getCodigoUsuario()).ifPresentOrElse((value) ->
+            toEdit.setUsuario(userRepository.getById(value)), () -> toEdit.setUsuario(null));
         return repository.save(toEdit);
     }
 
