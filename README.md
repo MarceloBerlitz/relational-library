@@ -1,90 +1,79 @@
-## POST: /clientes
+## POST: /usuarios
 ### Request Body
-```json
-{
-	"nome": "string"
-}
-```
-
-## GET: /clientes
-### Response Body
-```json
-{
-	"itens": [{
-		"codigo": "uuid",
-		"nome": "string"
-	}, {
-		"codigo": "uuid",
-		"nome": "string"
-	}]
-}
-```
-
-## GET: /clientes/:codigo
-### Response Body
 ```json
 {
 	"nome": "string",
-	"livros": [{
-		"codigo": "uuid",
-		"titulo": "string",
-		"descricao": "string",
-		"ano": 0,
-		"codigoCliente": "uuid",
-		"autores": [{
-				"codigo": "uuid",
-				"nome": "string"
-			},
-			{
-				"codigo": "uuid",
-				"nome": "string"
-			}
-		]
-	}]
+	"email": "string",
+	"tipo": "funcionario | cliente",
+	"senha": "string"
 }
 ```
 
-## PUT: /clientes/:codigo
-### Request Body
-```json
-{
-	"nome": "string"
-}
-```
-## DELETE: /clientes/:codigo
-
-## POST: /autores
-### Request Body
-```json 
-{
-	"nome": "string"
-}
-```
-
-## GET: /autores
+## GET: /usuarios
 ### Response Body
 ```json
 {
 	"itens": [{
-		"codigo": "uuid",
-		"nome": "string"
+		"codigo": 0,
+		"nome": "string",
+		"email": "string",
+		"tipo": "funcionario | cliente"
 	}, {
-		"codigo": "uuid",
-		"nome": "string"
+		"codigo": 0,
+		"nome": "string",
+		"email": "string",
+		"tipo": "funcionario | cliente"
 	}]
 }
 ```
 
-## PUT: /autores/:codigo
-### Request Body
+## GET: /usuarios/:codigo
+### Response Body
 ```json
 {
-	"nome": "string"
+	"codigo": 0,
+	"nome": "string",
+	"email": "string",
+	"tipo": "funcionario | cliente"
+	"livros": [{
+		"codigo": 0,
+		"titulo": "string",
+		"descricao": "string",
+		"ano": 0,
+		"codigoCliente": 0,
+		"autores": [ "string", "string" ]
+	}]
 }
 ```
 
-## DELETE: /autores/:codigo
+## PUT: /usuarios/:codigo
+### Request Body
+```json
+{
+	"codigo": 0,
+	"nome": "string",
+	"email": "string",
+	"senha": "string",
+	"tipo": "funcionario | cliente"
+}
+```
+## DELETE: /usuarios/:codigo
 
+## GET: /livros?busca=str
+### Response Body
+```json
+{
+	"items": [{
+		"codigo": 0,
+		"titulo": "string",
+		"descricao": "string",
+		"ano": 0,
+		"codigoCliente": 0,
+		"autores": ["string", "string"]
+
+	}]
+}
+```
 ## POST: /livros
 ### Request Body
 ```json
@@ -92,43 +81,40 @@
 	"titulo": "string",
 	"descricao": "string",
 	"ano": 0,
-	"autores": [
-		"uuid", "uuid"
-	]
+	"autores": ["string", "string"]
 }
 ```
-
-## GET: /livros
-### Response Body
-```json
-{
-	"codigo": "uuid",
-	"titulo": "string",
-	"descricao": "string",
-	"ano": 0,
-	"codigoCliente": "uuid",
-	"autores": [{
-			"codigo": "uuid",
-			"nome": "string"
-		},
-		{
-			"codigo": "uuid",
-			"nome": "string"
-		}
-	]
-}
-```
-
 ## PUT: /livros/:codigo
 ### Request Body
 ```json
 {
+	"codigo": 0,
 	"titulo": "string",
 	"descricao": "string",
 	"ano": 0,
-	"autores": [
-		"uuid", "uuid"
-	]
+	"autores": ["string", "string"]
+}
+```
+## GET: /livros/:codigo
+### Request Body
+```json
+{
+        "codigo": 0
+	"titulo": "string",
+	"descricao": "string",
+	"ano": 0,
+	"autores": ["string", "string"]
 }
 ```
 ## DELETE: /livros/:codigo
+
+## POST: /login
+### Request Body
+```json
+{
+        "email": "string",
+	"senha": "string"
+}
+```
+
+
