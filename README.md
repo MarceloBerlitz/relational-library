@@ -68,7 +68,6 @@
 		"titulo": "string",
 		"descricao": "string",
 		"ano": 0,
-		"codigoCliente": 0,
 		"autores": ["string", "string"]
 
 	}]
@@ -92,7 +91,8 @@
 	"titulo": "string",
 	"descricao": "string",
 	"ano": 0,
-	"autores": ["string", "string"]
+	"autores": ["string", "string"],
+	"codigoUsuario": 0
 }
 ```
 ## GET: /livros/:codigo
@@ -103,7 +103,14 @@
 	"titulo": "string",
 	"descricao": "string",
 	"ano": 0,
-	"autores": ["string", "string"]
+	"autores": ["string", "string"],
+	"usuario": {
+		"codigo": 0,
+		"nome": "string",
+		"email": "string",
+		"senha": "string",
+		"tipo": "funcionario | cliente"
+	}
 }
 ```
 ## DELETE: /livros/:codigo
