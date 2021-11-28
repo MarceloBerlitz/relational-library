@@ -68,7 +68,6 @@
 		"titulo": "string",
 		"descricao": "string",
 		"ano": 0,
-		"codigoCliente": 0,
 		"autores": ["string", "string"]
 
 	}]
