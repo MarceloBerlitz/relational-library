@@ -115,7 +115,7 @@
 ```
 ## DELETE: /livros/:codigo
 
-## POST: /login
+## POST: /usuarios/login
 ### Request Body
 ```json
 {
