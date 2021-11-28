@@ -2,16 +2,19 @@ package dev.berlitz.RelationalLibraryApi.models;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
 public class Book {
-
     @Id
     @GeneratedValue
-    private int id;
-    private String title;
+    private Integer codigo;
+    private String titulo;
+    private String descricao;
+    private Integer ano;
+    @ElementCollection
+    private List<String> autores;
 }
+
