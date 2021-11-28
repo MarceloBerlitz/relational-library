@@ -74,7 +74,16 @@
 	}]
 }
 ```
-
+## POST: /livros
+### Request Body
+```json
+{
+	"titulo": "string",
+	"descricao": "string",
+	"ano": 0,
+	"autores": ["string", "string"]
+}
+```
 ## PUT: /livros/:codigo
 ### Request Body
 ```json
