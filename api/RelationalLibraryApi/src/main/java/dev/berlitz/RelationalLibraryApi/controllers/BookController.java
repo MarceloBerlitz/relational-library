@@ -1,5 +1,6 @@
 package dev.berlitz.RelationalLibraryApi.controllers;
 
+import dev.berlitz.RelationalLibraryApi.integration.request.UpdateBookRequest;
 import dev.berlitz.RelationalLibraryApi.integration.response.GetAll;
 import dev.berlitz.RelationalLibraryApi.models.Book;
 import dev.berlitz.RelationalLibraryApi.services.BookService;
@@ -24,7 +25,7 @@ public class BookController {
 
     @PutMapping(value = "/{codigo}")
     @ResponseStatus(HttpStatus.OK)
-    public Book editBook(@PathVariable Integer codigo, @RequestBody Book book) {
+    public Book updateBook(@PathVariable Integer codigo, @RequestBody UpdateBookRequest book) {
         return service.updateBook(codigo, book);
     }
 
