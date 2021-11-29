@@ -7,12 +7,8 @@ export const Courses = () => {
     return (
         <BrowserRouter >
             <Routes>
-                <Route path="/" >
-                    <Login />
-                </Route>
-                <Route path="/home" >
-                    <Home />
-                </Route>
+                <Route path="/login" element={<Login/>}/>
+                <Route path="/home" element={<Home/>}/>
             </Routes>
         </BrowserRouter >
     );

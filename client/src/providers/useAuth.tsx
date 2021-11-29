@@ -2,37 +2,81 @@
 import { useEffect, useState, createContext, useContext } from "react";
 import { toast } from 'react-toastify'
 
-const initialUser = {
-  nome:'',
-  email:'',
-  tipo:'',
-  senha:'',
-  isLogged: false
-}
-
 interface userContextInterface {
   user: typeof initialUser,
-  getAnotherUser: (name:string) =>void,
   login: (name: string) => void,
   logout: () => void
 }
 
+interface Book {
+  codigo: number,
+  titulo: string,
+  descricao: string,
+  ano: number,
+  autores: Array<string>
+}
+
+interface booksContextInterface {
+  books: Array<Book>
+}
+
+const initialUser = {
+  nome: '',
+  email: '',
+  tipo: '',
+  senha: '',
+  logado: false
+}
+
+const initialBooks =
+  [
+    {
+      codigo: 0,
+      titulo: "",
+      descricao: "",
+      ano: 0,
+      autores: [""]
+    }
+  ]
+
+
 export const AuthContext = createContext<userContextInterface>(
   {
     user: initialUser,
-    getAnotherUser: name => name,
     login: name => name,
     logout: () => { }
   }
 );
 
+export const BookContext = createContext<booksContextInterface>(
+  {
+    books: initialBooks
+  }
+);
+
 export const AuthProvider = (props: any) => {
   const [user, setUser] = useState<typeof initialUser>(initialUser);
-  const [anotherUser, setAnotherUer] = useState<typeof initialUser>(initialUser);
+  const [books, setBooks] = useState<typeof initialBooks>(initialBooks);
+
+  const getBooks = async () => {
+    const resp = await fetch(`http://localhost:8080/livros`);
+    try {
+      if (resp.ok) {
+        const books = (await resp.json());
+        setBooks(books)
+      }
+      else {
+        setBooks(books)
+      }
+    }
+    catch (e) {
+      setBooks(initialBooks)
+    }
+  }
 
   const getUser = async (name: string, setByName: Function, showStatus: boolean) => {
     const resp = await fetch(`http://localhost:8080/usuarios/1`);
-    if(showStatus) handleStatus(resp.status | 0)
+    if (showStatus) handleStatus(resp.status | 0)
     try {
       if (resp.ok) {
         const user = (await resp.json());
@@ -47,16 +91,12 @@ export const AuthProvider = (props: any) => {
     }
   }
 
-  const login = (name:string) =>{
-    getUser(name,setUser,true)
+  const login = (name: string) => {
+    getUser(name, setUser, true)
   }
 
   const logout = () => {
     setUser(initialUser)
-  }
-
-  const getAnotherUser = (name:string) => {
-    getUser(name,setAnotherUer,false)
   }
 
   useEffect(() => {
@@ -69,11 +109,13 @@ export const AuthProvider = (props: any) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, getAnotherUser }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {props.children}
     </AuthContext.Provider>
   );
 };
+
+export const useAuth = () => useContext(AuthContext);
 
 const handleStatus = (status: number) => {
   if (status === 200) {
@@ -98,5 +140,3 @@ const handleStatus = (status: number) => {
     })
   }
 }
-
-export const useAuth = () => useContext(AuthContext);
