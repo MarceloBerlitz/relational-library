@@ -7,7 +7,9 @@ import dev.berlitz.RelationalLibraryApi.repository.BookRepository;
 import dev.berlitz.RelationalLibraryApi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,7 +24,7 @@ public class BookService {
     }
 
     public Book updateBook(Integer codigo, UpdateBookRequest book) {
-        Book toEdit = repository.getById(codigo);
+        var toEdit = repository.getById(codigo);
         toEdit.setTitulo(book.getTitulo());
         toEdit.setAno(book.getAno());
         toEdit.setDescricao(book.getDescricao());
@@ -30,6 +32,16 @@ public class BookService {
         Optional.ofNullable(book.getCodigoUsuario()).ifPresentOrElse((value) ->
             toEdit.setUsuario(userRepository.getById(value)), () -> toEdit.setUsuario(null));
         return repository.save(toEdit);
+    }
+
+    public void setCoverImage(Integer codigo, MultipartFile image) throws Exception {
+        var bytes = image.getBytes();
+        var type = image.getContentType();
+        System.out.println(bytes.length);
+        var toAddImage = repository.getById(codigo);
+        toAddImage.setImage(bytes);
+        toAddImage.setImageType(type);
+        repository.save(toAddImage);
     }
 
     public Book getBook(Integer codigo) {
@@ -40,7 +52,7 @@ public class BookService {
         repository.deleteById(codigo);
     }
 
-    public GetAll<Book> getAllBooks(String search) {
-        return new GetAll<>(repository.findByTituloContaining(search));
+    public List<Book> getAllBooks(String search) {
+        return repository.findByTituloContaining(search);
     }
 }
