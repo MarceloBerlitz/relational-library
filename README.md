@@ -84,6 +84,11 @@
 }
 ```
 ## PUT: /livros/:codigo
+## PATCH: /livros/:codigo/capa
+### Form Data
+```
+  file: imagem.png/jpeg/gif
+```
 ### Request Body
 ```json
 {
