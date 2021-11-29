@@ -1,12 +1,17 @@
 package dev.berlitz.RelationalLibraryApi.controllers;
 
 import dev.berlitz.RelationalLibraryApi.integration.request.UpdateBookRequest;
+import dev.berlitz.RelationalLibraryApi.integration.response.BookResponse;
 import dev.berlitz.RelationalLibraryApi.integration.response.GetAll;
+import dev.berlitz.RelationalLibraryApi.mappers.BookResponseMapper;
 import dev.berlitz.RelationalLibraryApi.models.Book;
 import dev.berlitz.RelationalLibraryApi.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
@@ -19,20 +24,31 @@ public class BookController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Book createBook(@RequestBody Book book) {
-        return service.createBook(book);
+    public BookResponse createBook(@RequestBody Book book) {
+        return BookResponseMapper.mapFrom(service.createBook(book));
+    }
+
+    @PatchMapping(value = "/{codigo}/capa")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Void> setCoverImage(@PathVariable Integer codigo, @RequestParam("file") MultipartFile file) {
+        try {
+            service.setCoverImage(codigo, file);
+            return ResponseEntity.ok().build();
+        } catch (Exception ex) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PutMapping(value = "/{codigo}")
     @ResponseStatus(HttpStatus.OK)
-    public Book updateBook(@PathVariable Integer codigo, @RequestBody UpdateBookRequest book) {
-        return service.updateBook(codigo, book);
+    public BookResponse updateBook(@PathVariable Integer codigo, @RequestBody UpdateBookRequest book) {
+        return BookResponseMapper.mapFrom(service.updateBook(codigo, book));
     }
 
     @GetMapping(value = "/{codigo}")
     @ResponseStatus(HttpStatus.OK)
-    public Book getBook(@PathVariable Integer codigo) {
-        return service.getBook(codigo);
+    public BookResponse getBook(@PathVariable Integer codigo) {
+        return BookResponseMapper.mapFrom(service.getBook(codigo));
     }
 
     @DeleteMapping(value = "/{codigo}")
@@ -43,8 +59,8 @@ public class BookController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public GetAll<Book> getAllBooks(@RequestParam(required = false) String search) {
-        return service.getAllBooks(Optional.ofNullable(search).orElse(""));
+    public GetAll<BookResponse> getAllBooks(@RequestParam(required = false) String search) {
+        return new GetAll<>(service.getAllBooks(Optional.ofNullable(search).orElse("")).stream().map(BookResponseMapper::mapFrom).toList());
     }
 
 

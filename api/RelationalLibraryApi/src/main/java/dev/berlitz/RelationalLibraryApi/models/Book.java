@@ -2,6 +2,7 @@ package dev.berlitz.RelationalLibraryApi.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.List;
@@ -23,5 +24,9 @@ public class Book {
     @JoinColumn(name="codigo_usuario")
     @JsonIgnoreProperties("livros")
     private User usuario;
+    @Lob
+    @Type(type="org.hibernate.type.BinaryType")
+    private byte[] image;
+    private String imageType;
 }
 
