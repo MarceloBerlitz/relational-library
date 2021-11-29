@@ -1,6 +1,8 @@
 import { Input } from 'antd'
 import { useState } from 'react'
 
+import { BookSheel } from '../Carousel/Carousel'
+
 export const Body = () => {
     const [bookName, setBookName] = useState('')
     return (
@@ -10,5 +12,6 @@ export const Body = () => {
                 placeholder="Livro de interesse"
                 onChange={e => setBookName(e.target.value)}
             />
+            <BookSheel/>
         </>)
 }
