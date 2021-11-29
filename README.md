@@ -34,7 +34,7 @@
 	"codigo": 0,
 	"nome": "string",
 	"email": "string",
-	"tipo": "funcionario | cliente"
+	"tipo": "funcionario | cliente",
 	"livros": [{
 		"codigo": 0,
 		"titulo": "string",
@@ -99,7 +99,7 @@
 ### Request Body
 ```json
 {
-        "codigo": 0
+	"codigo": 0,
 	"titulo": "string",
 	"descricao": "string",
 	"ano": 0,
@@ -119,7 +119,7 @@
 ### Request Body
 ```json
 {
-        "email": "string",
+	"email": "string",
 	"senha": "string"
 }
 ```
