@@ -1,11 +1,11 @@
 package dev.berlitz.RelationalLibraryApi.enumerators;
 
 public enum UserTypeEnum {
-    FUNCIONARIO("funcionario"), CLIENTE("cliente");
+    FUNCIONARIO(1), CLIENTE(2);
 
-    public String tipoUsuario;
+    public Integer tipoUsuario;
 
-    UserTypeEnum(String tipo) {
+    UserTypeEnum(Integer tipo) {
         tipoUsuario = tipo;
     }
 }

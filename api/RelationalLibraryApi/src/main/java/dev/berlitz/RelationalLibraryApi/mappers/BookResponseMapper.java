@@ -1,6 +1,5 @@
 package dev.berlitz.RelationalLibraryApi.mappers;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import dev.berlitz.RelationalLibraryApi.integration.response.BookResponse;
 import dev.berlitz.RelationalLibraryApi.models.Book;
 import org.springframework.util.ObjectUtils;
