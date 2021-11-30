@@ -9,7 +9,17 @@ public class UserResponseMapper {
         var response = new UserResponse();
         response.setCodigo(user.getCodigo());
         response.setEmail(user.getEmail());
-        response.setLivros(ObjectUtils.isEmpty(user.getLivros()) ? null : user.getLivros().stream().map(BookResponseMapper::mapFrom).toList());
+        response.setLivros(ObjectUtils.isEmpty(user.getLivros()) ? null : user.getLivros().stream().map(BookResponseMapper::mapInsideUser).toList());
+        response.setNome(user.getNome());
+        response.setSenha(user.getSenha());
+        response.setTipo(user.getTipo());
+        return response;
+    }
+
+    public static UserResponse mapInsideBook(User user) {
+        var response = new UserResponse();
+        response.setCodigo(user.getCodigo());
+        response.setEmail(user.getEmail());
         response.setNome(user.getNome());
         response.setSenha(user.getSenha());
         response.setTipo(user.getTipo());

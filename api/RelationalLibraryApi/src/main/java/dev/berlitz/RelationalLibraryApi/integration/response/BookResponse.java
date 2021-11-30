@@ -14,6 +14,6 @@ public class BookResponse {
     private Integer ano;
     private List<String> autores;
     @JsonIgnoreProperties("livros")
-    private User usuario;
+    private UserResponse usuario;
     private String image;
 }

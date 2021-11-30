@@ -26,7 +26,7 @@ type UserBookResponse = {
 type UserResponse = {
   codigo: number;
   nome: string;
-  tipo: UserTypeEnum;
+  tipo: string;
   email: string;
   senha: string;
   livros?: UserBookResponse[];
