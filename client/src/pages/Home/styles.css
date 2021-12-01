@@ -1,5 +1,3 @@
-
-
 .home-component-card-container {
   margin-top: 1rem;
   display: flex;
@@ -8,17 +6,18 @@
 }
 
 .home-component-card {
-  width: 500px;
-  height: 260px;
-  display: flex;
-  flex-direction: row;
+  width: 300px;
 }
 
 .home-component-card-image {
-  height: 260px;
-  width: 180px !important;
+  max-width: 100px;
+  height: auto;
 }
 
 .home-component-search-book-input {
   margin-top: 1rem !important;
+}
+
+.home-component-card-list {
+  padding: 1rem !important;
 }

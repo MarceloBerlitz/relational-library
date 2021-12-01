@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Card, Input } from "antd";
+import { Button, Card, Input } from "antd";
 
 import { useServices } from "../../providers/ServiceProvider";
 import { BookResponse } from "../../api/books";
@@ -8,12 +8,14 @@ import { BookResponse } from "../../api/books";
 import "./styles.css";
 import { debounce } from "../../shared/debounce";
 import ObjectList from "../../components/ObjectList/ObjectList";
+import EditBookModal from "./EditBookModal/EditBookModal";
 
 const Home = () => {
   const { books } = useServices();
 
   const [booksState, setBooks] = useState<BookResponse[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [bookToEdit, setBookToEdit] = useState<BookResponse | null>(null);
 
   useEffect(() => {
     books.getAllBooks(searchTerm).then(({ itens }) => setBooks(itens));
@@ -31,6 +33,7 @@ const Home = () => {
       <div className="home-component-card-container">
         {booksState.map(({ image, ...boook }) => (
           <Card
+            bodyStyle={{ padding: 0 }}
             className="home-component-card"
             key={boook.codigo}
             cover={
@@ -40,11 +43,18 @@ const Home = () => {
                 alt="Cover"
               />
             }
+            actions={[
+              <Button onClick={() => setBookToEdit(boook)}>Editar</Button>,
+            ]}
           >
-            <ObjectList obj={boook} />
+            <ObjectList className="home-component-card-list" obj={boook} />
           </Card>
         ))}
       </div>
+      <EditBookModal
+        bookToEdit={bookToEdit}
+        onClose={() => setBookToEdit(null)}
+      />
     </>
   );
 };
