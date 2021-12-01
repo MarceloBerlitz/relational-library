@@ -12,12 +12,14 @@ export const AppRoutes = () => {
         <Route path="/" element={<Navigate to={user ? "/home" : "/login"} />} />
         {noLayoutRoutes.map(({ element, ...other }) => (
           <Route
+            key={other.path}
             element={!user ? element : <Navigate to={"/home"} />}
             {...other}
           />
         ))}
         {layoutRoutes.map(({ element, ...other }) => (
           <Route
+            key={other.path}
             element={
               user ? <Layout>{element}</Layout> : <Navigate to={"/login"} />
             }

@@ -1,4 +1,5 @@
-import { Layout, Menu } from "antd";
+import { Button, Layout, Menu } from "antd";
+import { useAuth } from "../../providers/AuthProvider";
 
 import "./styles.css";
 
@@ -9,13 +10,30 @@ type Props = {
 };
 
 export const LayoutComponent = ({ children }: Props) => {
+  const { setUser } = useAuth();
   return (
     <Layout>
-      <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
+      <Header
+        style={{
+          position: "fixed",
+          zIndex: 1,
+          width: "100%",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
           <Menu.Item key="1">Livros</Menu.Item>
           <Menu.Item key="2">Usuário</Menu.Item>
         </Menu>
+        <Button
+          onClick={() => {
+            setUser(null);
+          }}
+        >
+          Sair
+        </Button>
       </Header>
       <Content
         className="site-layout"
