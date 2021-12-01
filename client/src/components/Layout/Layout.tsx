@@ -1,5 +1,7 @@
 import { Layout, Menu } from "antd";
 
+import "./styles.css";
+
 const { Header, Content, Footer } = Layout;
 
 type Props = {
@@ -10,7 +12,6 @@ export const LayoutComponent = ({ children }: Props) => {
   return (
     <Layout>
       <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
-        <div className="logo" />
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
           <Menu.Item key="1">Livros</Menu.Item>
           <Menu.Item key="2">Usuário</Menu.Item>

@@ -1,15 +1,25 @@
-#components-layout-demo-side .logo {
-  height: 32px;
-  margin: 16px;
-  background: rgba(255, 255, 255, 0.3);
+
+
+.home-component-card-container {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
-.site-layout .site-layout-background {
-  background: #fff;
+.home-component-card {
+  width: 500px;
+  height: 220px;
+  display: flex;
+  flex-direction: row;
+  padding: 10px !important;
 }
 
-.logo{
-  height: 32px;
-  margin: 16px;
-  background: rgba(255, 255, 255, 0.3);
+.home-component-card-image {
+  height: 200px;
+  width: 130px !important;
+}
+
+.home-component-search-book-input {
+  margin-top: 1rem !important;
 }

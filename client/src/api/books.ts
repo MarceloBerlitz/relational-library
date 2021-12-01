@@ -6,7 +6,7 @@ const ax = axios.create({
   baseURL: "http://localhost:8080/livros",
 });
 
-type BookRequest = {
+export type BookRequest = {
   codigo?: number;
   titulo: string;
   descricao: string;
@@ -15,7 +15,7 @@ type BookRequest = {
   codigoUsuario?: number;
 };
 
-type BookUserResponse = {
+export type BookUserResponse = {
   codigo: number;
   nome: string;
   email: string;
@@ -23,7 +23,7 @@ type BookUserResponse = {
   tipo: UserTypeEnum;
 };
 
-type BookResponse = {
+export type BookResponse = {
   codigo: number;
   titulo: string;
   descricao?: string;
