@@ -9,15 +9,14 @@
 
 .home-component-card {
   width: 500px;
-  height: 220px;
+  height: 260px;
   display: flex;
   flex-direction: row;
-  padding: 10px !important;
 }
 
 .home-component-card-image {
-  height: 200px;
-  width: 130px !important;
+  height: 260px;
+  width: 180px !important;
 }
 
 .home-component-search-book-input {

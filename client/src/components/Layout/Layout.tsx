@@ -1,4 +1,5 @@
 import { Button, Layout, Menu } from "antd";
+import { useNavigate } from "react-router";
 import { useAuth } from "../../providers/AuthProvider";
 
 import "./styles.css";
@@ -11,6 +12,7 @@ type Props = {
 
 export const LayoutComponent = ({ children }: Props) => {
   const { setUser } = useAuth();
+  const navigate = useNavigate();
   return (
     <Layout>
       <Header
@@ -24,8 +26,12 @@ export const LayoutComponent = ({ children }: Props) => {
         }}
       >
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
-          <Menu.Item key="1">Livros</Menu.Item>
-          <Menu.Item key="2">Usuário</Menu.Item>
+          <Menu.Item key="1" onClick={() => navigate("/home")}>
+            Livros
+          </Menu.Item>
+          <Menu.Item key="2" onClick={() => navigate("/user")}>
+            Usuário
+          </Menu.Item>
         </Menu>
         <Button
           onClick={() => {

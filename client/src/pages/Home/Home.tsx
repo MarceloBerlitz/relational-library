@@ -7,6 +7,7 @@ import { BookResponse } from "../../api/books";
 
 import "./styles.css";
 import { debounce } from "../../shared/debounce";
+import ObjectList from "../../components/ObjectList/ObjectList";
 
 const Home = () => {
   const { books } = useServices();
@@ -23,7 +24,9 @@ const Home = () => {
       <Input
         className="home-component-search-book-input"
         placeholder="Livro de interesse"
-        onChange={(evt) => debounce(() => setSearchTerm(evt.target.value), 500)()}
+        onChange={(evt) =>
+          debounce(() => setSearchTerm(evt.target.value), 500)()
+        }
       />
       <div className="home-component-card-container">
         {booksState.map(({ image, ...boook }) => (
@@ -38,7 +41,7 @@ const Home = () => {
               />
             }
           >
-            {JSON.stringify(boook)}
+            <ObjectList obj={boook} />
           </Card>
         ))}
       </div>

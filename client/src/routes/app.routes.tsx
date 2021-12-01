@@ -9,7 +9,7 @@ export const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to={user ? "/home" : "/login"} />} />
+        <Route path="*" element={<Navigate to={user ? "/home" : "/login"} />} />
         {noLayoutRoutes.map(({ element, ...other }) => (
           <Route
             key={other.path}
