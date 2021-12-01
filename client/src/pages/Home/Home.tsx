@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { Card, Input } from "antd";
+
 import { useServices } from "../../providers/ServiceProvider";
 import { BookResponse } from "../../api/books";
 
@@ -13,7 +14,7 @@ const Home = () => {
 
   useEffect(() => {
     books.getAllBooks().then(({ itens }) => setBooks(itens));
-  }, []);
+  }, [books]);
   return (
     <>
       <Input
@@ -24,7 +25,7 @@ const Home = () => {
         {booksState.map(({ image, ...boook }) => (
           <Card
             className="home-component-card"
-            cover={<img className="home-component-card-image" src={image} />}
+            cover={<img className="home-component-card-image" src={image} alt="Cover"/>}
           >
             {JSON.stringify(boook)}
           </Card>

@@ -1,17 +1,28 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Layout from "../components/Layout/Layout";
+import { useAuth } from "../providers/AuthProvider";
 import { layoutRoutes, noLayoutRoutes } from "./routes";
 
 export const AppRoutes = () => {
+  const { user } = useAuth();
   return (
     <BrowserRouter>
       <Routes>
-        {noLayoutRoutes.map((route) => (
-          <Route {...route} />
+        <Route path="/" element={<Navigate to={user ? "/home" : "/login"} />} />
+        {noLayoutRoutes.map(({ element, ...other }) => (
+          <Route
+            element={!user ? element : <Navigate to={"/home"} />}
+            {...other}
+          />
         ))}
         {layoutRoutes.map(({ element, ...other }) => (
-          <Route element={<Layout>{element}</Layout>} {...other} />
+          <Route
+            element={
+              user ? <Layout>{element}</Layout> : <Navigate to={"/login"} />
+            }
+            {...other}
+          />
         ))}
       </Routes>
     </BrowserRouter>
