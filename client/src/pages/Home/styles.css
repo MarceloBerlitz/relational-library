@@ -30,6 +30,6 @@
 .home-component-card-cover {
   width: 100%;
   background-color: darkgrey;
-  display: flex;
-  justify-content: center;
+  display: flex !important;
+  justify-content: center !important;
 }
