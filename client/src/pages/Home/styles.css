@@ -7,11 +7,16 @@
 
 .home-component-card {
   width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .home-component-card-image {
   max-width: 100px;
   height: auto;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .home-component-search-book-input {
@@ -20,4 +25,11 @@
 
 .home-component-card-list {
   padding: 1rem !important;
+}
+
+.home-component-card-cover {
+  width: 100%;
+  background-color: darkgrey;
+  display: flex;
+  justify-content: center;
 }

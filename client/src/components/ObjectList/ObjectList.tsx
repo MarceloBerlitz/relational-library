@@ -1,3 +1,10 @@
+const verifyArray = (value: any) => {
+  if (Array.isArray(value)) {
+    return value.join(", ");
+  }
+  return value;
+};
+
 const ObjectList = ({
   obj,
   className,
@@ -10,9 +17,9 @@ const ObjectList = ({
     <ul style={{ listStyle: "none", paddingLeft: 0 }} className={className}>
       {Object.entries(obj).map(([key, value]) => {
         return (
-          <li>
+          <li key={key}>
             <strong style={{ textTransform: "capitalize" }}>{key}</strong>:{" "}
-            {value ? value : "-"}
+            {value ? verifyArray(value) : "-"}
           </li>
         );
       })}
