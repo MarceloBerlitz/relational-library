@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Form, Input, Modal } from "antd";
+import { Button, Form, Input, Modal, Upload } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import { BookResponse } from "../../../api/books";
 import { useServices } from "../../../providers/ServiceProvider";
@@ -14,6 +14,16 @@ const EditBookModal = ({ bookToEdit, onClose }: Props) => {
   const [form] = useForm();
   const [loading, setLoading] = useState(false);
   const { books } = useServices();
+
+  /* EXPORT TO COMPONENT */
+  const [fileList, setFileList] = useState<any[]>([]);
+
+  const handleChange = (info: any) => {
+    let fileListTemp = [...info.fileList];
+    fileListTemp = fileListTemp.slice(-1);
+    setFileList(fileListTemp);
+  };
+  /* EXPORT TO COMPONENT */
 
   useEffect(() => {
     form.setFieldsValue(bookToEdit);
@@ -44,6 +54,34 @@ const EditBookModal = ({ bookToEdit, onClose }: Props) => {
       confirmLoading={loading}
       onOk={form.submit}
     >
+      {/* EXPORT TO COMPONENT */}
+      <Form.Item>
+        <Upload
+          accept="image/*"
+          name="file"
+          listType="picture"
+          onChange={handleChange}
+          fileList={fileList}
+          customRequest={({ file, onSuccess, onError, onProgress }) => {
+            books
+              .setCoverImage(bookToEdit!.codigo, file as File, onProgress)
+              .then(() => {
+                if (onSuccess) {
+                  onSuccess({});
+                }
+              })
+              .catch((err) => {
+                if (onError) {
+                  onError(err);
+                }
+              });
+          }}
+        >
+          <Button>Upload cover</Button>
+        </Upload>
+      </Form.Item>
+      {/* EXPORT TO COMPONENT */}
+
       <Form form={form} layout="vertical" onFinish={formFinishHandler}>
         <Form.Item label="Título" name="titulo">
           <Input type="text" />

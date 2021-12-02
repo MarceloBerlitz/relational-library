@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { UserTypeEnum } from "./enum/UserTypeEnum";
 import { GetAll } from "./shared/GetAll";
 
@@ -46,11 +46,20 @@ export const updateBook = (
 
 export const setCoverImage = async (
   bookCode: number,
-  file: File
+  file: File,
+  onProgress: any
 ): Promise<void> => {
   const formData = new FormData();
+
+  const config: AxiosRequestConfig = {
+    headers: { "content-type": "multipart/form-data" },
+    onUploadProgress: (event) => {
+      onProgress({ percent: (event.loaded / event.total) * 100 }, file);
+    },
+  };
+
   formData.append("file", file);
-  await ax.patch(`/${bookCode}`, formData);
+  await ax.patch(`/${bookCode}/capa`, formData, config);
 };
 
 export const getAllBooks = (search?: string): Promise<GetAll<BookResponse>> => {

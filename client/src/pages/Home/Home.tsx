@@ -59,7 +59,13 @@ const Home = () => {
             }
             actions={[
               <Button onClick={() => setBookToEdit(boook)}>Editar</Button>,
-              <Button danger onClick={() => deleteBook(boook)}>
+              <Button
+                danger
+                onClick={() => {
+                  deleteBook(boook);
+                  updateBooks();
+                }}
+              >
                 Excluir
               </Button>,
             ]}
