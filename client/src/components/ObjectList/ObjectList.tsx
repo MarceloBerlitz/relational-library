@@ -1,6 +1,11 @@
-const verifyArray = (value: any) => {
+const verifyObject = (value: any): React.ReactNode => {
   if (Array.isArray(value)) {
-    return value.join(", ");
+    return value.map((item, index) =>
+      index > 0 ? <>, {verifyObject(item)}</> : verifyObject(item)
+    );
+  }
+  if (typeof value === "object") {
+    return <ObjectList obj={value} />;
   }
   return value;
 };
@@ -14,12 +19,12 @@ const ObjectList = ({
 }) => {
   if (!obj) return null;
   return (
-    <ul style={{ listStyle: "none", paddingLeft: 0 }} className={className}>
+    <ul style={{ listStyle: "none", paddingLeft: 10 }} className={className}>
       {Object.entries(obj).map(([key, value]) => {
         return (
           <li key={key}>
             <strong style={{ textTransform: "capitalize" }}>{key}</strong>:{" "}
-            {value ? verifyArray(value) : "-"}
+            {value ? verifyObject(value) : "-"}
           </li>
         );
       })}

@@ -38,6 +38,7 @@ const EditBookModal = ({ bookToEdit, onClose }: Props) => {
       ? request.autores
       : request.autores.split(",").map((aut: string) => aut.trim());
     request.codigoUsuario = bookToEdit?.usuario?.codigo;
+
     books.updateBook(bookToEdit!.codigo, request).finally(() => {
       setLoading(false);
       if (onClose) {
