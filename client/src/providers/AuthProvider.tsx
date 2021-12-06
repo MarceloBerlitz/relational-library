@@ -6,7 +6,7 @@ const providerValue = {
   setUser: () => {},
 };
 
-type AuthContextType = {
+export type AuthContextType = {
   user: UserResponse | null;
   setUser: (user: UserResponse | null) => void;
 };
