@@ -12,7 +12,7 @@ export type BookRequest = {
   descricao: string;
   ano: number;
   autores: string[];
-  codigoUsuario?: number;
+  codigoUsuario?: number | null;
 };
 
 export type BookUserResponse = {
@@ -26,8 +26,8 @@ export type BookUserResponse = {
 export type BookResponse = {
   codigo: number;
   titulo: string;
-  descricao?: string;
-  ano?: number;
+  descricao: string;
+  ano: number;
   autores: string[];
   usuario?: BookUserResponse;
   image?: string;
