@@ -15,7 +15,7 @@ const User = () => {
     users.getUser(other.codigo).then((usr) => {
       setUser(usr);
     });
-  }, []);
+  }, [other.codigo, users, setUser]);
 
   return (
     <div>

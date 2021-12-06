@@ -57,7 +57,7 @@ const Home = () => {
           debounce(() => setSearchTerm(evt.target.value), 500)()
         }
       />
-      <CreateBook onCreate={updateBooks} />
+      {user?.tipo === "FUNCIONARIO" && <CreateBook onCreate={updateBooks} />}
       <div className="home-component-card-container">
         {booksState.map(({ image, usuario, ...boook }) => (
           <Card
@@ -74,21 +74,30 @@ const Home = () => {
               </span>
             }
             actions={[
-              <Button onClick={() => setBookToEdit(boook)}>Editar</Button>,
-              <Button
-                danger
-                onClick={() => {
-                  deleteBook(boook);
-                  updateBooks();
-                }}
-              >
-                Excluir
-              </Button>,
+              ...(user?.tipo === "FUNCIONARIO"
+                ? [
+                    <Button
+                      onClick={() => setBookToEdit({ ...boook, usuario })}
+                    >
+                      Editar
+                    </Button>,
+                    <Button
+                      danger
+                      onClick={() => {
+                        deleteBook(boook);
+                        updateBooks();
+                      }}
+                    >
+                      Excluir
+                    </Button>,
+                  ]
+                : []),
               <Button
                 loading={takeLoading}
                 onClick={() => takeBook(boook, usuario)}
+                disabled={usuario && usuario.codigo !== user?.codigo}
               >
-                {!!usuario ? "Devolver" : "Pegar"}
+                {usuario?.codigo === user?.codigo ? "Devolver" : "Pegar"}
               </Button>,
             ]}
           >
