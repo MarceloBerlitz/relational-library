@@ -1,4 +1,4 @@
-import { Button, Layout, Menu } from "antd";
+import { Layout, Menu } from "antd";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../providers/AuthProvider";
 
@@ -25,7 +25,12 @@ export const LayoutComponent = ({ children }: Props) => {
           justifyContent: "space-between",
         }}
       >
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          defaultSelectedKeys={["1"]}
+          style={{ width: 400 }}
+        >
           <Menu.Item key="1" onClick={() => navigate("/home")}>
             Livros
           </Menu.Item>
@@ -33,13 +38,16 @@ export const LayoutComponent = ({ children }: Props) => {
             Usuário
           </Menu.Item>
         </Menu>
-        <Button
-          onClick={() => {
-            setUser(null);
-          }}
-        >
-          Sair
-        </Button>
+        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]}>
+          <Menu.Item
+            key="3"
+            onClick={() => {
+              setUser(null);
+            }}
+          >
+            Sair
+          </Menu.Item>
+        </Menu>
       </Header>
       <Content
         className="site-layout"

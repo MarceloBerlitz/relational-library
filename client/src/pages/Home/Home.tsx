@@ -50,14 +50,16 @@ const Home = () => {
 
   return (
     <>
-      <Input
-        className="home-component-search-book-input"
-        placeholder="Livro de interesse"
-        onChange={(evt) =>
-          debounce(() => setSearchTerm(evt.target.value), 500)()
-        }
-      />
-      {user?.tipo === "FUNCIONARIO" && <CreateBook onCreate={updateBooks} />}
+      <div style={{ margin: "0 auto", display: "flex", flexDirection: "row", padding: '1rem', justifyContent: "center", gap: 10}}>
+        <Input
+          className="home-component-search-book-input"
+          placeholder="Livro de interesse"
+          onChange={(evt) =>
+            debounce(() => setSearchTerm(evt.target.value), 500)()
+          }
+        />
+        {user?.tipo === "FUNCIONARIO" && <CreateBook onCreate={updateBooks} />}
+      </div>
       <div className="home-component-card-container">
         {booksState.map(({ image, usuario, ...boook }) => (
           <Card

@@ -18,7 +18,7 @@ const User = () => {
   }, [other.codigo, users, setUser]);
 
   return (
-    <div>
+    <div style={{paddingTop: 40}}>
       <ObjectList
         obj={{ ...other, livros: livros?.map((livro) => livro.titulo) }}
       />

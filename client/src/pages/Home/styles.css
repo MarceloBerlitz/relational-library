@@ -3,24 +3,26 @@
   display: flex;
   flex-direction: row;
   gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .home-component-card {
-  width: 300px;
+  width: 350px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .home-component-card-image {
-  max-width: 100px;
-  height: auto;
+  height: 200px;
+  width: auto;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .home-component-search-book-input {
-  margin-top: 1rem !important;
+  width: 200px !important;
 }
 
 .home-component-card-list {
