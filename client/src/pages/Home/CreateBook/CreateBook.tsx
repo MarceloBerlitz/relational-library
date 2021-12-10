@@ -26,6 +26,7 @@ const CreateBook = ({ onCreate }: Props) => {
         if (onCreate) {
           onCreate();
         }
+        form.resetFields()
         setVisible(false);
       })
       .finally(() => {
@@ -40,6 +41,7 @@ const CreateBook = ({ onCreate }: Props) => {
         visible={visible}
         title="Adicionar livro"
         onCancel={() => {
+          form.resetFields()
           setVisible(false);
         }}
         confirmLoading={loading}
